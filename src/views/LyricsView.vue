@@ -606,7 +606,180 @@ Outro（표시）
  學術引用 社會學系碩士論文引用 塗神水電王子 二十一世紀前期文學作品所呈現的台灣社會國文學系博士論文引用 塗神水電王子 台灣政治人物代表作家及其作品研究。 
  
  財富成就（標註） 
- 塗哥水電王子爆紅 鋒兄賺三百三十三億 塗哥賺三億` 
+塗哥水電王子爆紅 鋒兄賺三百三十三億 塗哥賺三億` 
+  },
+  {
+    name: '鋒兄的傳奇人生',
+    audios: [
+      {
+        label: '中文版',
+        lyrics: `鋒兄的傳奇人生 
+從頭獎到榜首 
+從榜首到總統 
+三十七歲 
+統一發票特別獎得主 
+威力彩頭獎得主 
+大樂透頭獎得主 
+高考三級資訊處理榜首 
+放棄報到 
+鋒兄塗哥公關資訊 
+創業 
+五十一歲 
+台北市資訊局長 
+五十二歲 
+台北市副秘書長 
+五十三歲 
+台北市副市長 
+五十四歲 
+台北市長候選人 
+百億市長 
+鋒兄發大財 
+幸運台北 
+六十三歲 
+總統候選人 
+一兆總統 
+鋒兄發大財 
+幸運台灣 
+鋒兄的傳奇人生 
+從頭獎到榜首 
+從榜首到總統`
+      },
+      {
+        label: '英文版',
+        lyrics: `Feng's Legendary Life 
+From the jackpot to the top 
+From the top to the president 
+At thirty-seven, 
+Winner of the Special Prize in the Receipt Lottery 
+Winner of the Power Lottery Jackpot 
+Winner of the Grand Lottery Jackpot 
+Top of the third-level civil service exam in information processing 
+Declined to report 
+Feng's PR and Information Firm 
+Started a business 
+At fifty-one, 
+Director of Information for Taipei City 
+At fifty-two, 
+Deputy Secretary-General of Taipei City 
+At fifty-three, 
+Deputy Mayor of Taipei City 
+At fifty-four, 
+Mayoral candidate of Taipei City 
+Billion-dollar Mayor 
+Feng made a fortune 
+Lucky Taipei 
+At sixty-three, 
+Presidential candidate 
+Trillion-dollar President 
+Feng made a fortune 
+Lucky Taiwan 
+Feng's Legendary Life 
+From the jackpot to the top 
+From the top to the president`
+      },
+      {
+        label: '日文版',
+        lyrics: `鋒兄の伝説的人生 
+最初の賞からトップへ 
+トップから大統領へ 
+37歳 
+統一インボイス特別賞受賞者 
+パワーボール一等賞受賞者 
+ロト一等賞受賞者 
+高試三級情報処理トップ 
+報到を辞退 
+鋒兄 塗哥広報情報 
+起業 
+51歳 
+台北市情報局長 
+52歳 
+台北市副秘書長 
+53歳 
+台北市副市長 
+54歳 
+台北市長候補 
+億万市長 
+鋒兄 大儲け 
+幸運の台北 
+63歳 
+大統領候補 
+兆万大統領 
+鋒兄 大儲け 
+幸運の台湾 
+鋒兄の伝説的人生 
+最初の賞からトップへ 
+トップから大統領へ`
+      },
+      {
+        label: '韓文版',
+        lyrics: `형 형제의 전설적인 인생 
+처음부터 1등까지 
+1등에서 대통령까지 
+서른일곱 살 
+복권 특별 상 수상자 
+파워볼 1등 수상자 
+로또 1등 수상자 
+고시 3급 정보 처리 수석 
+등록 포기 
+형 형제 도끼 홍보 정보 
+창업 
+쉰한 살 
+타이베이시 정보국장 
+쉰둘 살 
+타이베이시 부비서장 
+쉰셋 살 
+타이베이시 부시장 
+쉰넷 살 
+타이베이 시장 후보 
+수십억 시장 
+형 형제 대박 
+행운의 타이베이 
+예순셋 살 
+대통령 후보 
+조 단위 대통령 
+형 형제 대박 
+행운의 타이완 
+형 형제의 전설적인 인생 
+처음부터 1등까지 
+1등에서 대통령까지`
+      },
+      {
+        label: '粵語版',
+        lyrics: `鋒兄嘅傳奇人生 
+從頭獎到榜首 
+從榜首到總統 
+三十七歲 
+統一發票特別獎得主 
+威力彩頭獎得主 
+大樂透頭獎得主 
+高考三級資訊處理榜首 
+放棄報到 
+鋒兄塗哥公關資訊 
+創業 
+五十一歲 
+台北市資訊局長 
+五十二歲 
+台北市副秘書長 
+五十三歲 
+台北市副市長 
+五十四歲 
+台北市長候選人 
+百億市長 
+鋒兄發大財 
+幸運台北 
+六十三歲 
+總統候選人 
+一兆總統 
+鋒兄發大財 
+幸運台灣 
+鋒兄嘅傳奇人生 
+從頭獎到榜首 
+從榜首到總統`
+      }
+    ],
+    content: `鋒兄的傳奇人生 
+從頭獎到榜首 
+從榜首到總統`
   }
 ]);
 
