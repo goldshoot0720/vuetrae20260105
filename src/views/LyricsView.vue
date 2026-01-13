@@ -613,6 +613,7 @@ Outro（표시）
     audios: [
       {
         label: '中文版',
+        url: 'https://api.stormkit.io/volumes/file/4gTSWVpLDlPDA1V0nw9fMb3cNBelwn8GRKwqONCuQQt2mGSP2A==',
         lyrics: `鋒兄的傳奇人生 
 從頭獎到榜首 
 從榜首到總統 
@@ -646,6 +647,7 @@ Outro（표시）
       },
       {
         label: '英文版',
+        url: 'https://api.stormkit.io/volumes/file/PXcfN03hMcmX0Za1KFnkNvnW9dLDktRjx6LSlQIjEiUEFQA7dw==',
         lyrics: `Feng's Legendary Life 
 From the jackpot to the top 
 From the top to the president 
@@ -679,6 +681,7 @@ From the top to the president`
       },
       {
         label: '日文版',
+        url: 'https://api.stormkit.io/volumes/file/ukPtjTsHsx_XetAI2q_XIaPLZ5jdevOefYhprhNzwR7dRs0ywQ==',
         lyrics: `鋒兄の伝説的人生 
 最初の賞からトップへ 
 トップから大統領へ 
@@ -712,6 +715,7 @@ From the top to the president`
       },
       {
         label: '韓文版',
+        url: 'https://api.stormkit.io/volumes/file/8jppU2ju1-4WKLN6uKzsKCO9KelwEi7rwy5cRZuQgWktMIolHQ==',
         lyrics: `형 형제의 전설적인 인생 
 처음부터 1등까지 
 1등에서 대통령까지 
@@ -745,6 +749,7 @@ From the top to the president`
       },
       {
         label: '粵語版',
+        url: 'https://api.stormkit.io/volumes/file/2GwGcv2pgQE3twSLYV9zI0xdcX4wtmyWmA6_mpRFxmlHeDINIA==',
         lyrics: `鋒兄嘅傳奇人生 
 從頭獎到榜首 
 從榜首到總統 
