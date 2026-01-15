@@ -427,6 +427,35 @@ Outro（표시）
 행복도 이렇게 바쁘게 올 수 있다면 
 그럼 나도 내일 한 장 사야겠다`
       }
+      ,
+      {
+        label: '中文版 (SpongeBob SquarePants)',
+        url: 'https://api.stormkit.io/volumes/file/5uThAvGu0Hkqb7TrSA3DK4cqoCUmnuXU4ttPPcaI3ywCbV0bkA=='
+      },
+      {
+        label: '中文版 (Sidhu)',
+        url: 'https://api.stormkit.io/volumes/file/jGEDWbnUXPfRF1gyLiyPGuDTZegLH9flTV6xtsqEEfNT8jiKGw=='
+      },
+      {
+        label: '中文版 (Rose)',
+        url: 'https://api.stormkit.io/volumes/file/nX4onrAv5sDyDC8taLz7oIQ5Tj85DnRW-Y8-oz3AUotASqttRQ=='
+      },
+      {
+        label: '中文版 (Pekora)',
+        url: 'https://api.stormkit.io/volumes/file/ovPIJs8dZ1dvNQB35saIWG4i4zOMTTGNzw0zaq6UHxh0n1NFIA=='
+      },
+      {
+        label: '中文版 (Hatsune Miku)',
+        url: 'https://api.stormkit.io/volumes/file/DG1fnmOZhK6ub-Bu8dgFhTcJ_TJPkfL38o5_VBIVk8SgwlVMsg=='
+      },
+      {
+        label: '中文版 (Freddie Mercury)',
+        url: 'https://api.stormkit.io/volumes/file/GLj3f7FBKyRMrRcl1oIL9UmjYqA7G6-dWGv1XesuhUU3yn1yHg=='
+      },
+      {
+        label: '中文版 (Donald Trump)',
+        url: 'https://api.stormkit.io/volumes/file/KqJOf9haetgfOn8ze2pmjDS4tGGaJ1AElcZ4mXLXb99IXs-MUQ=='
+      }
     ],
     content: `Intro（標註） 
  鋒兄啊你說真的還假的 
