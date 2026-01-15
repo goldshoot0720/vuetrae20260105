@@ -635,6 +635,35 @@ Outro（표시）
 재산과 성취 (財富成就, 韓語)
 투哥 전기왕자 폭발적 인기, 풍형 3,330억 원 벌다, 투哥 3억 원 벌다.`
       }
+      ,
+      {
+        label: '中文版 (SpongeBob SquarePants)',
+        url: 'https://api.stormkit.io/volumes/file/xojZL_U_ETCCRPszx9hyoqLp8sgxCg-HR9vBHIM0eFEaXbS2OQ=='
+      },
+      {
+        label: '中文版 (Sidhu)',
+        url: 'https://api.stormkit.io/volumes/file/SJ6ii_X2m3xAPYo0zW6jm5XSQ4njKoFwjTdoG4i5lKkZcxG4Mg=='
+      },
+      {
+        label: '中文版 (Rose)',
+        url: 'https://api.stormkit.io/volumes/file/YXmW9xi94DNgiLm4Iqn2TeKx3hmhaDw5IgFSmc5LcDXPIMSPjA=='
+      },
+      {
+        label: '中文版 (Pekora)',
+        url: 'https://api.stormkit.io/volumes/file/LbEk1WJx7b-z0LDq5cGGFAmS8tjPIjd_M2xx8mtUlMM7DLQmtQ=='
+      },
+      {
+        label: '中文版 (Hatsune Miku)',
+        url: 'https://api.stormkit.io/volumes/file/DVB0ejTxvt79-pnGkURkAvpQGSs4J3DFY1TVVfCAYGziwH807w=='
+      },
+      {
+        label: '中文版 (Freddie Mercury)',
+        url: 'https://api.stormkit.io/volumes/file/bBOPsrWF5gLSxnbU0PX2GsaAB2Q38vtf79i9rQZhZItu1xgL9g=='
+      },
+      {
+        label: '中文版 (Donald Trump)',
+        url: 'https://api.stormkit.io/volumes/file/jSRNCGdDII6OG2RWIfgE_hbt4bdiHC01vgtx0FZo_CS8D-Mqfw=='
+      }
     ],
     content: `故事開始（標註） 
  西元兩零零四年六月十五日，這一天是國中畢業生可以在畢業紀念冊留下紀念簽名的一天，同時也是我們故事主角塗神：塗三傑――江湖人稱塗哥一切的開始。 
