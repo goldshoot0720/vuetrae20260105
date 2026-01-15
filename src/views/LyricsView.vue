@@ -224,6 +224,35 @@ AI로 보조하는 행정, 데이터 공개 새 시대~
 아야코지도 고개 끄덕, 이 진화는 이상에 부합해! 
 “불가능 진화론?” 아니야—이건 펑셩 진화 쇼! 🔥`
       }
+      ,
+      {
+        label: '中文版 (SpongeBob SquarePants)',
+        url: 'https://api.stormkit.io/volumes/file/qSSTa184MedR4mgHa89mNk3cJjecA8d3DWBCX9_dFUq6g8Y81Q=='
+      },
+      {
+        label: '中文版 (Sidhu)',
+        url: 'https://api.stormkit.io/volumes/file/Rkc6J3xVDE6N0zl8QUmK2DuThtV6ev6UmT7Svciz4SeevNkhzQ=='
+      },
+      {
+        label: '中文版 (Rose)',
+        url: 'https://api.stormkit.io/volumes/file/aKwYy7ZTNo2z8CKgIGCAhl4gUKfzT52h84u8OAazqIZimpNZJQ=='
+      },
+      {
+        label: '中文版 (Pekora)',
+        url: 'https://api.stormkit.io/volumes/file/2oY8Lg-P8VxeyBqOrrhD44Ms8aRF0S8ere9DnO6JeL3x_PTc_g=='
+      },
+      {
+        label: '中文版 (Hatsune Miku)',
+        url: 'https://api.stormkit.io/volumes/file/uOrpSUUckeF1Kx6A-3bNo9PpRtS1HIv1zi2b6AkXJOoEX_D2Pw=='
+      },
+      {
+        label: '中文版 (Freddie Mercury)',
+        url: 'https://api.stormkit.io/volumes/file/vQA5mE96OVPHePOYqWlzxDDgnjztuIMsqeYElO5SfdOOFrDH7Q=='
+      },
+      {
+        label: '中文版 (Donald Trump)',
+        url: 'https://api.stormkit.io/volumes/file/M0eMKnJdGV0SxLvSnIRtPq746DCY_L9bbzFnBS5bI12_bf8zwg=='
+      }
     ],
     content: `Hook（標注） 
  台北有鋒兄真好！ 
