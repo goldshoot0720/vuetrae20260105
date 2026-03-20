@@ -183,87 +183,127 @@ const images = ref([
 
 <style scoped>
 .page {
-  color: #fff;
+  color: var(--color-text);
+  display: grid;
+  gap: 1rem;
 }
 .header {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 0.9rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: var(--radius-xl);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
+}
+.header h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 1.15rem + 0.8vw, 2.2rem);
 }
 .badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: rgba(255,255,255,0.2);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(63, 103, 255, 0.82));
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #04111f;
+  box-shadow: 0 18px 36px rgba(47, 113, 255, 0.22);
 }
-.actions .btn {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin-left: 8px;
+.actions {
+  display: flex;
+  gap: 0.6rem;
+}
+.actions .btn,
+.toolbar .btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  color: var(--color-text-strong);
+  padding: 0.82rem 1rem;
+  border-radius: 999px;
 }
 .actions .primary {
-  background: #ff5a5f;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .toolbar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 0.8rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(151, 191, 255, 0.1);
 }
 .search {
   flex: 1;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: none;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  background: rgba(7, 12, 26, 0.72);
+  color: var(--color-text-strong);
 }
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 1rem;
 }
 .card {
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
+  background: var(--panel-bg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  box-shadow: var(--panel-shadow);
 }
 .card:hover {
-  transform: scale(1.02);
+  transform: translateY(-4px);
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .thumb {
-  height: 180px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  height: 200px;
+  background: linear-gradient(135deg, rgba(79, 114, 204, 0.38), rgba(11, 16, 31, 0.12));
   overflow: hidden;
+  position: relative;
+}
+.thumb::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, rgba(3, 7, 18, 0.55));
 }
 .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s;
+  transition: transform 0.45s ease;
 }
 .card:hover .thumb img {
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 .meta {
-  padding: 10px 12px;
+  padding: 1rem 1rem 1.1rem;
 }
 .name {
-  font-weight: 600;
+  font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-bottom: 4px;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-strong);
 }
 .info {
-  font-size: 12px;
-  opacity: 0.9;
+  font-size: 0.76rem;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 @media (max-width: 1200px) {
   .cards {
@@ -290,13 +330,15 @@ const images = ref([
   }
   .actions {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 0.5rem;
     display: flex;
     gap: 8px;
   }
   .actions .btn {
     flex: 1;
-    margin-left: 0;
+  }
+  .toolbar {
+    flex-direction: column;
   }
 }
 </style>

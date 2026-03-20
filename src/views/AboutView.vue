@@ -4,12 +4,20 @@
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+<style scoped>
+.about {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  border-radius: var(--radius-xl);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
+}
+
+.about h1 {
+  font-size: clamp(2rem, 1.4rem + 2vw, 3.6rem);
+  text-align: center;
 }
 </style>

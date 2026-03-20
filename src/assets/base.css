@@ -1,53 +1,33 @@
-/* color palette from <https://github.com/vuejs/theme> */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
-
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  color-scheme: dark;
+  --color-background: oklch(0.16 0.02 252);
+  --color-background-soft: oklch(0.21 0.028 252);
+  --color-background-mute: oklch(0.26 0.03 248);
+  --color-border: color-mix(in oklab, white 12%, transparent);
+  --color-border-hover: color-mix(in oklab, white 24%, transparent);
+  --color-heading: oklch(0.95 0.01 250);
+  --color-text: oklch(0.82 0.02 245);
+  --color-text-strong: oklch(0.98 0.01 250);
+  --color-text-soft: oklch(0.7 0.02 245);
+  --panel-bg: linear-gradient(180deg, rgba(13, 18, 34, 0.82), rgba(8, 12, 26, 0.72));
+  --panel-bg-strong: linear-gradient(180deg, rgba(19, 26, 48, 0.94), rgba(8, 12, 24, 0.92));
+  --panel-stroke: rgba(163, 196, 255, 0.16);
+  --panel-shadow: 0 28px 80px rgba(1, 6, 20, 0.45);
+  --accent: oklch(0.74 0.12 208);
+  --accent-strong: oklch(0.82 0.14 196);
+  --accent-soft: rgba(75, 170, 255, 0.18);
+  --accent-secondary: oklch(0.72 0.09 164);
+  --danger: oklch(0.68 0.19 20);
+  --warning: oklch(0.8 0.14 92);
+  --success: oklch(0.79 0.12 157);
+  --radius-xl: 28px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --content-width: 1320px;
+  --section-gap: clamp(1.25rem, 2vw, 2rem);
 }
 
 *,
@@ -62,25 +42,80 @@ body {
   min-height: 100vh;
   color: var(--color-text);
   background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
+  line-height: 1.55;
   font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
+    'Manrope',
     'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
     sans-serif;
   font-size: 15px;
+  letter-spacing: 0.01em;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: auto;
+  pointer-events: none;
+  z-index: -2;
+}
+
+body::before {
+  top: -18rem;
+  right: -10rem;
+  width: 42rem;
+  height: 42rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(100, 194, 255, 0.28) 0%, rgba(100, 194, 255, 0.08) 34%, rgba(100, 194, 255, 0) 70%);
+  filter: blur(10px);
+}
+
+body::after {
+  left: -14rem;
+  bottom: -18rem;
+  width: 36rem;
+  height: 36rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(96, 255, 193, 0.16) 0%, rgba(96, 255, 193, 0.06) 38%, rgba(96, 255, 193, 0) 72%);
+  filter: blur(14px);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+::selection {
+  background: rgba(101, 195, 255, 0.3);
+  color: var(--color-text-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

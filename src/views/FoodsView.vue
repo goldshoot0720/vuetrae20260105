@@ -200,177 +200,211 @@ onMounted(() => {
 
 <style scoped>
 .page {
-  color: #fff;
+  color: var(--color-text);
+  display: grid;
+  gap: 1rem;
 }
 .header {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 0.9rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: var(--radius-xl);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
+}
+.header h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 1.15rem + 0.8vw, 2.2rem);
 }
 .badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: rgba(255,255,255,0.2);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(63, 103, 255, 0.82));
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #04111f;
+  box-shadow: 0 18px 36px rgba(47, 113, 255, 0.22);
 }
-.actions .btn {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin-left: 8px;
+.actions {
+  display: flex;
+  gap: 0.7rem;
+}
+.actions .btn,
+.toolbar .btn,
+.ops .btn,
+.modal-actions .btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  color: var(--color-text-strong);
+  padding: 0.82rem 1rem;
+  border-radius: 999px;
+  margin-left: 0;
 }
 .actions .primary {
-  background: #ff5a5f;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .toolbar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 0.8rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(151, 191, 255, 0.1);
 }
 .search {
   flex: 1;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: none;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  background: rgba(7, 12, 26, 0.72);
+  color: var(--color-text-strong);
 }
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 1rem;
 }
 .card {
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
+  background: var(--panel-bg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   display: grid;
   grid-template-columns: 140px 1fr;
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
 }
 .thumb.food {
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  min-height: 100%;
+  background:
+    linear-gradient(135deg, rgba(79, 114, 204, 0.38), rgba(11, 16, 31, 0.12));
   background-size: cover;
   background-position: center;
 }
 .meta {
-  padding: 10px 12px;
+  padding: 1rem 1rem 1.1rem;
 }
 .name {
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--color-text-strong);
 }
 .info {
-  font-size: 12px;
-  opacity: 0.9;
-  margin: 6px 0;
+  font-size: 0.84rem;
+  color: var(--color-text);
+  margin: 0.55rem 0 0;
 }
 .ops {
-  margin-top: 8px;
+  margin-top: 0.85rem;
   display: flex;
-  gap: 8px;
+  gap: 0.7rem;
 }
 .ops .btn {
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
+  padding: 0.72rem 0.95rem;
+  font-size: 0.78rem;
 }
 .ops .btn.danger {
-  background: rgba(255, 90, 95, 0.2);
-  color: #ff5a5f;
+  background: rgba(255, 107, 129, 0.12);
+  color: #ffd8dc;
+  border-color: rgba(255, 124, 142, 0.22);
 }
 .shop-tag {
   display: inline-block;
-  background: rgba(255,255,255,0.1);
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12px;
-  margin-bottom: 4px;
+  background: rgba(255,255,255,0.06);
+  padding: 0.22rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  margin-bottom: 0.45rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
 }
 .details {
   display: flex;
-  gap: 8px;
-  font-size: 13px;
-  opacity: 0.9;
-  margin-bottom: 4px;
+  gap: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-text-soft);
+  margin-bottom: 0.45rem;
 }
 .expiry {
-  font-size: 13px;
-  color: #fff;
+  font-size: 0.82rem;
+  color: var(--color-text-strong);
 }
 .expiry.expired {
-  color: #ff5a5f;
+  color: var(--danger);
   font-weight: bold;
 }
 .expiry.warning {
-  color: #ffc107;
+  color: var(--warning);
   font-weight: bold;
 }
+.no-data {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(151, 191, 255, 0.22);
+  color: var(--color-text-soft);
+}
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(4, 8, 18, 0.64);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(14px);
 }
 .modal {
-  background: #2a2a2a;
-  padding: 24px;
-  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(12, 19, 38, 0.96), rgba(6, 10, 22, 0.96));
+  padding: 1.5rem;
+  border-radius: var(--radius-xl);
   width: 90%;
   max-width: 500px;
-  color: #fff;
+  color: var(--color-text-strong);
+  border: 1px solid rgba(151, 191, 255, 0.16);
+  box-shadow: 0 34px 100px rgba(1, 6, 18, 0.55);
 }
 .modal h3 {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 1.1rem;
 }
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  opacity: 0.8;
+  margin-bottom: 0.55rem;
+  font-size: 0.84rem;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 .form-group input {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  background: rgba(7, 12, 26, 0.82);
+  color: var(--color-text-strong);
   box-sizing: border-box;
 }
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 24px;
-}
-.modal-actions .btn {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
 }
 .modal-actions .btn.primary {
-  background: #4facfe;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 
 @media (max-width: 900px) {
@@ -385,6 +419,7 @@ onMounted(() => {
   .header {
     display: flex;
     flex-wrap: wrap;
+    padding: 1rem;
   }
   .header h2 {
     flex: 1;
@@ -392,14 +427,14 @@ onMounted(() => {
   }
   .actions {
     width: 100%;
-    margin-top: 10px;
-    margin-left: 0;
     display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+    gap: 0.8rem;
   }
   .actions .btn {
     flex: 1;
+  }
+  .toolbar {
+    flex-direction: column;
   }
 }
 </style>

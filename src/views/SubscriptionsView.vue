@@ -169,165 +169,192 @@ onMounted(() => {
 
 <style scoped>
 .page {
-  color: #fff;
+  color: var(--color-text);
+  display: grid;
+  gap: 1rem;
 }
 .header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+  gap: 0.9rem;
   flex-wrap: wrap;
+  padding: 1.25rem 1.3rem;
+  border-radius: var(--radius-xl);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
 }
 .header h2 {
   flex: 1;
   min-width: 150px;
+  margin: 0;
+  font-size: clamp(1.45rem, 1.15rem + 0.8vw, 2.2rem);
 }
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 0.7rem;
 }
 .badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: rgba(255,255,255,0.2);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(63, 103, 255, 0.82));
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  color: #04111f;
+  box-shadow: 0 18px 36px rgba(47, 113, 255, 0.22);
 }
-.actions .btn {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 8px;
+.actions .btn,
+.toolbar .btn,
+.ops .btn,
+.modal-actions .btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  color: var(--color-text-strong);
+  padding: 0.82rem 1rem;
+  border-radius: 999px;
   margin-left: 0;
 }
 .actions .primary {
-  background: #ff5a5f;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .toolbar {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 0.8rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(151, 191, 255, 0.1);
 }
 .search {
   flex: 1;
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: none;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  background: rgba(7, 12, 26, 0.72);
+  color: var(--color-text-strong);
 }
 .list {
   display: grid;
-  gap: 10px;
+  gap: 1rem;
 }
 .item {
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 12px;
+  background: var(--panel-bg);
+  border-radius: var(--radius-xl);
+  padding: 1.2rem;
   display: grid;
   grid-template-columns: 1fr 1fr auto;
   align-items: center;
-  gap: 10px;
+  gap: 1rem;
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
 }
 .main-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.45rem;
 }
 .name {
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text-strong);
 }
 .site-link a {
-  color: #4facfe;
+  color: var(--accent-strong);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 0.82rem;
 }
 .meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-size: 14px;
-  opacity: 0.9;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+  color: var(--color-text);
 }
 .note {
-  font-size: 12px;
-  opacity: 0.7;
-  color: #ffeb3b;
+  font-size: 0.76rem;
+  color: var(--warning);
+}
+.price {
+  color: var(--color-text-strong);
+  font-weight: 700;
 }
 .ops .btn {
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 8px;
-  margin-left: 6px;
+  padding: 0.72rem 0.95rem;
 }
 .ops .danger {
-  background: #ff5a5f;
+  color: #ffd8dc;
+  border-color: rgba(255, 124, 142, 0.22);
+  background: rgba(255, 107, 129, 0.12);
+}
+.no-data {
+  padding: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px dashed rgba(151, 191, 255, 0.22);
+  color: var(--color-text-soft);
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(4, 8, 18, 0.64);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(14px);
 }
 .modal {
-  background: #2a2a2a;
-  padding: 24px;
-  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(12, 19, 38, 0.96), rgba(6, 10, 22, 0.96));
+  padding: 1.5rem;
+  border-radius: var(--radius-xl);
   width: 90%;
   max-width: 500px;
-  color: #fff;
+  color: var(--color-text-strong);
+  border: 1px solid rgba(151, 191, 255, 0.16);
+  box-shadow: 0 34px 100px rgba(1, 6, 18, 0.55);
 }
 .modal h3 {
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 1.1rem;
 }
 .form-group {
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 .form-group label {
   display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
-  opacity: 0.8;
+  margin-bottom: 0.55rem;
+  font-size: 0.84rem;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 .form-group input {
   width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  background: rgba(7, 12, 26, 0.82);
+  color: var(--color-text-strong);
   box-sizing: border-box;
 }
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 24px;
-}
-.modal-actions .btn {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
 }
 .modal-actions .btn.primary {
-  background: #4facfe;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 
 @media (max-width: 700px) {
@@ -339,21 +366,26 @@ onMounted(() => {
     display: flex;
     justify-content: flex-end;
     margin-top: 4px;
+    gap: 0.6rem;
   }
   .header {
-    margin-bottom: 16px;
-  }
-  .actions {
-    width: 100%;
-    margin-top: 8px;
-    justify-content: flex-start;
-  }
-  .actions .btn {
-    flex: 1;
+    padding: 1rem;
   }
   .modal {
     width: 95%;
-    padding: 20px;
+    padding: 1.25rem;
+  }
+  .toolbar,
+  .actions {
+    flex-direction: column;
+  }
+  .actions {
+    width: 100%;
+  }
+  .actions .btn,
+  .toolbar .btn,
+  .modal-actions .btn {
+    width: 100%;
   }
 }
 </style>

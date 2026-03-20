@@ -483,117 +483,139 @@ const initSubscriptionSchema = async () => {
 
 <style scoped>
 .actions {
-  margin-top: 24px;
+  margin-top: 1.2rem;
   display: flex;
   justify-content: flex-end;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 0.8rem;
 }
 .actions.start {
   justify-content: flex-start;
 }
 .btn {
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
   cursor: pointer;
-  font-size: 1rem;
-  font-weight: 500;
-  transition: opacity 0.2s;
+  font-size: 0.94rem;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-strong);
 }
 .btn:hover {
-  opacity: 0.9;
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .primary {
-  background: #ff5a5f;
-  color: #fff;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .page {
-  color: #fff;
-  max-width: 800px;
+  color: var(--color-text);
+  max-width: 980px;
+  display: grid;
+  gap: 1rem;
 }
 .header {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 0.9rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: var(--radius-xl);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
+}
+.header h2 {
+  margin: 0;
+  font-size: clamp(1.45rem, 1.15rem + 0.8vw, 2.2rem);
 }
 .badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: rgba(255,255,255,0.2);
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(63, 103, 255, 0.82));
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
+  color: #04111f;
+  box-shadow: 0 18px 36px rgba(47, 113, 255, 0.22);
 }
 .card {
-  background: rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 24px;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--panel-bg);
+  border-radius: var(--radius-xl);
+  padding: 1.4rem;
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
 }
 h3 {
-  margin-bottom: 8px;
-  font-size: 1.2rem;
+  margin-bottom: 0.55rem;
+  font-size: 1.15rem;
 }
 .desc {
-  opacity: 0.7;
-  margin-bottom: 24px;
+  color: var(--color-text-soft);
+  margin-bottom: 1.25rem;
   font-size: 0.9rem;
 }
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 1.1rem;
 }
 .form-group:last-child {
   margin-bottom: 0;
 }
 label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  opacity: 0.9;
+  margin-bottom: 0.55rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
 }
 .input-wrapper {
   display: flex;
-  gap: 10px;
+  gap: 0.8rem;
 }
 input {
   flex: 1;
-  background: rgba(0,0,0,0.2);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 8px;
-  padding: 10px 14px;
-  color: #fff;
-  font-family: monospace;
+  background: rgba(7, 12, 26, 0.82);
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  border-radius: 1rem;
+  padding: 0.85rem 1rem;
+  color: var(--color-text-strong);
+  font-family: 'Space Grotesk', 'Manrope', sans-serif;
   font-size: 0.95rem;
 }
 input:focus {
   outline: none;
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(120, 217, 255, 0.28);
 }
 .copy-btn {
-  background: rgba(255,255,255,0.15);
-  border: none;
-  color: #fff;
-  padding: 0 16px;
-  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  color: var(--color-text-strong);
+  padding: 0 1rem;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background 0.2s;
   white-space: nowrap;
   flex-shrink: 0;
 }
 .copy-btn:hover {
-  background: rgba(255,255,255,0.25);
+  border-color: rgba(120, 217, 255, 0.28);
 }
 
 @media (max-width: 600px) {
+  .header {
+    padding: 1rem;
+  }
   .actions {
     justify-content: flex-start;
   }
   .actions .btn {
     width: 100%;
+  }
+  .input-wrapper {
+    flex-direction: column;
   }
 }
 </style>

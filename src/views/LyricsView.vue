@@ -1124,72 +1124,111 @@ const closeModal = () => {
 
 <style scoped>
 .page {
-  padding: 20px;
+  color: var(--color-text);
+  display: grid;
+  gap: 1rem;
 }
 
 .header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  padding: 1.25rem 1.3rem;
+  border-radius: var(--radius-xl);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-stroke);
+  box-shadow: var(--panel-shadow);
+}
+
+.header h2 {
+  margin: 0;
+  flex: 1;
+  min-width: 12rem;
+  font-size: clamp(1.45rem, 1.15rem + 0.8vw, 2.2rem);
 }
 
 .badge {
-  font-size: 2rem;
-  margin-right: 10px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(63, 103, 255, 0.82));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #04111f;
+  box-shadow: 0 18px 36px rgba(47, 113, 255, 0.22);
 }
 
 .actions {
   margin-left: auto;
+  display: flex;
+  gap: 0.8rem;
 }
 
 .toolbar {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 0.8rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(151, 191, 255, 0.1);
 }
 
 .search {
   flex: 1;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  border-radius: 1rem;
+  background: rgba(7, 12, 26, 0.72);
+  color: var(--color-text-strong);
 }
 
 .btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
+  padding: 0.82rem 1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  border-radius: 999px;
   cursor: pointer;
-  background-color: #f0f0f0;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-strong);
 }
 
 .btn.primary {
-  background-color: #4CAF50;
-  color: white;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  border-color: rgba(120, 217, 255, 0.28);
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 1rem;
 }
 
 .card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid var(--panel-stroke);
+  border-radius: var(--radius-xl);
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+  border-color: rgba(120, 217, 255, 0.28);
 }
 
 .thumb.lyrics {
-  height: 150px;
-  background-color: #e0e0e0;
+  height: 170px;
+  background:
+    linear-gradient(135deg, rgba(72, 108, 209, 0.44), rgba(13, 18, 34, 0.78)),
+    radial-gradient(circle at top right, rgba(93, 186, 255, 0.26), transparent 45%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1201,42 +1240,52 @@ const closeModal = () => {
 }
 
 .meta {
-  padding: 15px;
+  padding: 1rem 1rem 1.1rem;
 }
 
 .name {
-  font-weight: bold;
-  margin-bottom: 5px;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-strong);
 }
 
 .info {
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.76rem;
+  color: var(--color-text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(4, 8, 18, 0.64);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(14px);
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(12, 19, 38, 0.96), rgba(6, 10, 22, 0.96));
+  padding: 1.5rem;
+  border-radius: var(--radius-xl);
   width: 90%;
-  max-width: 600px;
+  max-width: 780px;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 34px 100px rgba(1, 6, 18, 0.55);
+  border: 1px solid rgba(151, 191, 255, 0.16);
+  color: var(--color-text);
+}
+
+.modal-content h3 {
+  margin: 0 0 1rem;
+  color: var(--color-text-strong);
 }
 
 @media (max-width: 600px) {
@@ -1245,7 +1294,7 @@ const closeModal = () => {
   }
   .actions {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 0.5rem;
     margin-left: 0;
   }
   .actions .btn {
@@ -1254,37 +1303,41 @@ const closeModal = () => {
   .cards {
     grid-template-columns: 1fr;
   }
+  .toolbar {
+    flex-direction: column;
+  }
 }
 
 .audio-player-section {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  padding: 15px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
+  margin-top: 1rem;
+  margin-bottom: 0.8rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(151, 191, 255, 0.1);
 }
 
 .audio-tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
   flex-wrap: wrap;
 }
 
 .audio-tab {
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background: white;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
   cursor: pointer;
   font-size: 0.9rem;
-  transition: all 0.2s;
+  color: var(--color-text);
 }
 
 .audio-tab.active {
-  background-color: #4CAF50;
-  color: white;
-  border-color: #4CAF50;
+  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
+  color: var(--color-text-strong);
+  border-color: rgba(120, 217, 255, 0.28);
 }
 
 .audio-control {
@@ -1293,12 +1346,13 @@ const closeModal = () => {
 }
 
 .lyrics-text {
-  margin: 20px 0;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 4px;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-lg);
   white-space: pre-wrap;
   line-height: 1.6;
+  border: 1px solid rgba(151, 191, 255, 0.1);
 }
 
 .lyrics-text pre {
@@ -1310,14 +1364,15 @@ const closeModal = () => {
 .modal-actions {
   display: flex;
   justify-content: flex-end;
+  gap: 0.8rem;
 }
 
 .no-audio-message {
-  padding: 10px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
+  padding: 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 1rem;
   text-align: center;
-  color: #666;
+  color: var(--color-text-soft);
   font-size: 0.9rem;
 }
 </style>

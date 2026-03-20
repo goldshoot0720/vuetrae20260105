@@ -68,56 +68,102 @@ onUnmounted(() => {
 .app-shell {
   display: flex;
   min-height: 100vh;
+  position: relative;
 }
 .content {
   display: flex;
   flex-direction: column;
-  transition: margin-left 0.3s, width 0.3s;
+  min-height: 100vh;
+  transition:
+    margin-left 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
 }
 .topbar {
-  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: 5.5rem;
   display: flex;
   align-items: center;
-  padding: 0 24px;
-  color: #fff;
-  gap: 16px;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 2vw, 2rem) 0.75rem;
+  margin: 0 auto;
+  width: min(100%, calc(var(--content-width) + 4rem));
+  color: var(--color-text-strong);
 }
 .topbar h1 {
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: clamp(1.15rem, 1rem + 0.8vw, 1.75rem);
+  font-weight: 700;
   margin: 0;
+  letter-spacing: -0.04em;
+  text-shadow: 0 0 24px rgba(90, 185, 255, 0.12);
 }
 .menu-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: #fff;
+  width: 3rem;
+  height: 3rem;
+  background:
+    linear-gradient(180deg, rgba(24, 36, 68, 0.92), rgba(11, 18, 34, 0.92));
+  border: 1px solid rgba(136, 177, 255, 0.18);
+  color: var(--color-text-strong);
   cursor: pointer;
-  padding: 8px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 0;
+  border-radius: 1rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 16px 32px rgba(3, 8, 22, 0.28);
 }
 .menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(33, 48, 90, 0.96), rgba(14, 24, 46, 0.96));
+  border-color: rgba(126, 207, 255, 0.36);
 }
 .main {
-  padding: 24px;
+  width: min(100%, calc(var(--content-width) + 4rem));
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 2vw, 2rem) 2rem;
 }
 .bg {
   position: fixed;
   inset: 0;
-  background: radial-gradient(1200px 600px at 60% 10%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 60%), linear-gradient(180deg, #5a64e0 0%, #7b66e8 40%, #865fe6 100%);
+  background:
+    linear-gradient(180deg, rgba(4, 8, 18, 0.96), rgba(6, 10, 20, 0.98)),
+    radial-gradient(1200px 800px at 78% 10%, rgba(65, 151, 255, 0.18) 0%, rgba(65, 151, 255, 0) 62%),
+    radial-gradient(880px 660px at 18% 12%, rgba(102, 255, 201, 0.12) 0%, rgba(102, 255, 201, 0) 58%);
   z-index: -1;
+  overflow: hidden;
+}
+.bg::before,
+.bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.bg::before {
+  background-image:
+    linear-gradient(rgba(135, 175, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(135, 175, 255, 0.06) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 88%);
+}
+.bg::after {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px),
+    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px),
+    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.09) 0 1px, transparent 1px);
+  background-size: 240px 240px, 300px 300px, 360px 360px;
+  opacity: 0.5;
 }
 .mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(4, 8, 18, 0.55);
   z-index: 900;
-  backdrop-filter: blur(2px);
-  animation: fadeIn 0.3s;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.28s ease;
 }
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -126,19 +172,19 @@ onUnmounted(() => {
 
 @media (max-width: 900px) {
   .topbar {
-    padding: 0 16px;
+    min-height: 5rem;
+    padding: 1rem 1rem 0.5rem;
   }
   .main {
-    padding: 16px;
+    padding: 0 1rem 1.25rem;
   }
 }
 
-/* iPhone SE (375px) and small mobile devices adjustments */
 @media (max-width: 375px) {
   .topbar {
-    padding: 0 12px;
-    height: 50px;
-    gap: 12px;
+    padding: 0.8rem 0.75rem 0.4rem;
+    min-height: 4.6rem;
+    gap: 0.75rem;
   }
   .topbar h1 {
     font-size: 1rem;
@@ -147,10 +193,11 @@ onUnmounted(() => {
     text-overflow: ellipsis;
   }
   .menu-toggle {
-    padding: 6px;
+    width: 2.7rem;
+    height: 2.7rem;
   }
   .main {
-    padding: 12px;
+    padding: 0 0.75rem 1rem;
   }
 }
 </style>
