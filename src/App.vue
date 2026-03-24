@@ -1,16 +1,16 @@
 <script setup>
-import { RouterView } from 'vue-router'
+import { RouterView, useRoute } from 'vue-router'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import Sidebar from './components/Sidebar.vue'
-import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 
 const isSidebarOpen = ref(true)
 const isMobile = ref(false)
+const route = useRoute()
 
 const checkScreenSize = () => {
   const mobile = window.innerWidth <= 900
   if (isMobile.value !== mobile) {
     isMobile.value = mobile
-    // Auto-close on mobile, auto-open on desktop when switching
     isSidebarOpen.value = !mobile
   }
 }
@@ -25,11 +25,14 @@ const closeMobileMenu = () => {
   }
 }
 
-// Dynamic content style
 const contentStyle = computed(() => ({
   marginLeft: isMobile.value || !isSidebarOpen.value ? '0' : '240px',
-  width: isMobile.value || !isSidebarOpen.value ? '100%' : 'calc(100% - 240px)'
+  width: isMobile.value || !isSidebarOpen.value ? '100%' : 'calc(100% - 240px)',
 }))
+
+const topbarTitle = computed(() => route.meta?.title || 'AI 管理中心')
+const topbarEyebrow = computed(() => route.meta?.eyebrow || 'Workspace')
+const topbarStatus = computed(() => (isMobile.value ? 'Mobile Adaptive' : 'Desktop Layout'))
 
 onMounted(() => {
   checkScreenSize()
@@ -54,10 +57,24 @@ onUnmounted(() => {
             <line x1="3" y1="18" x2="21" y2="18"></line>
           </svg>
         </button>
-        <h1>歡迎使用鋒兄AI資訊系統</h1>
+        <div class="topbar-copy">
+          <div class="eyebrow">{{ topbarEyebrow }}</div>
+          <h1>{{ topbarTitle }}</h1>
+        </div>
+        <div class="topbar-rail">
+          <div class="status-pill">
+            <span class="status-dot"></span>
+            <span>{{ topbarStatus }}</span>
+          </div>
+          <div class="status-pill subtle">2026 Interface</div>
+        </div>
       </header>
       <main class="main">
-        <RouterView />
+        <RouterView v-slot="{ Component, route: currentRoute }">
+          <Transition name="page-fade" mode="out-in">
+            <component :is="Component" :key="currentRoute.fullPath" />
+          </Transition>
+        </RouterView>
       </main>
     </div>
   </div>
@@ -70,6 +87,7 @@ onUnmounted(() => {
   min-height: 100vh;
   position: relative;
 }
+
 .content {
   display: flex;
   flex-direction: column;
@@ -79,6 +97,7 @@ onUnmounted(() => {
     width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
 }
+
 .topbar {
   position: sticky;
   top: 0;
@@ -92,6 +111,19 @@ onUnmounted(() => {
   width: min(100%, calc(var(--content-width) + 4rem));
   color: var(--color-text-strong);
 }
+
+.topbar-copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--color-text-soft);
+}
+
 .topbar h1 {
   font-size: clamp(1.15rem, 1rem + 0.8vw, 1.75rem);
   font-weight: 700;
@@ -99,6 +131,41 @@ onUnmounted(() => {
   letter-spacing: -0.04em;
   text-shadow: 0 0 24px rgba(90, 185, 255, 0.12);
 }
+
+.topbar-rail {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.status-pill {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  color: var(--color-text-strong);
+  font-size: 0.8rem;
+}
+
+.status-pill.subtle {
+  color: var(--color-text-soft);
+}
+
+.status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(109, 255, 204, 1), rgba(79, 173, 255, 1));
+  box-shadow: 0 0 14px rgba(109, 255, 204, 0.45);
+}
+
 .menu-toggle {
   display: flex;
   align-items: center;
@@ -116,16 +183,32 @@ onUnmounted(() => {
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 16px 32px rgba(3, 8, 22, 0.28);
 }
+
 .menu-toggle:hover {
   background:
     linear-gradient(180deg, rgba(33, 48, 90, 0.96), rgba(14, 24, 46, 0.96));
   border-color: rgba(126, 207, 255, 0.36);
 }
+
 .main {
   width: min(100%, calc(var(--content-width) + 4rem));
   margin: 0 auto;
   padding: 0 clamp(1rem, 2vw, 2rem) 2rem;
 }
+
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+.page-fade-enter-from,
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
 .bg {
   position: fixed;
   inset: 0;
@@ -136,12 +219,14 @@ onUnmounted(() => {
   z-index: -1;
   overflow: hidden;
 }
+
 .bg::before,
 .bg::after {
   content: '';
   position: absolute;
   inset: 0;
 }
+
 .bg::before {
   background-image:
     linear-gradient(rgba(135, 175, 255, 0.06) 1px, transparent 1px),
@@ -149,6 +234,7 @@ onUnmounted(() => {
   background-size: 84px 84px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 88%);
 }
+
 .bg::after {
   background:
     radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px),
@@ -157,6 +243,7 @@ onUnmounted(() => {
   background-size: 240px 240px, 300px 300px, 360px 360px;
   opacity: 0.5;
 }
+
 .mobile-overlay {
   position: fixed;
   inset: 0;
@@ -165,6 +252,7 @@ onUnmounted(() => {
   backdrop-filter: blur(10px);
   animation: fadeIn 0.28s ease;
 }
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -174,7 +262,15 @@ onUnmounted(() => {
   .topbar {
     min-height: 5rem;
     padding: 1rem 1rem 0.5rem;
+    flex-wrap: wrap;
   }
+
+  .topbar-rail {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
   .main {
     padding: 0 1rem 1.25rem;
   }
@@ -186,16 +282,29 @@ onUnmounted(() => {
     min-height: 4.6rem;
     gap: 0.75rem;
   }
+
   .topbar h1 {
     font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  .topbar-rail {
+    gap: 0.5rem;
+  }
+
+  .status-pill {
+    min-height: 2.2rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.74rem;
+  }
+
   .menu-toggle {
     width: 2.7rem;
     height: 2.7rem;
   }
+
   .main {
     padding: 0 0.75rem 1rem;
   }
