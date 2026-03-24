@@ -96,6 +96,7 @@ onUnmounted(() => {
     margin-left 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   position: relative;
+  isolation: isolate;
 }
 
 .topbar {
@@ -196,6 +197,10 @@ onUnmounted(() => {
   padding: 0 clamp(1rem, 2vw, 2rem) 2rem;
 }
 
+.main :deep(.page) {
+  animation: section-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 .page-fade-enter-active,
 .page-fade-leave-active {
   transition:
@@ -258,6 +263,17 @@ onUnmounted(() => {
   to { opacity: 1; }
 }
 
+@keyframes section-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 900px) {
   .topbar {
     min-height: 5rem;
@@ -273,6 +289,20 @@ onUnmounted(() => {
 
   .main {
     padding: 0 1rem 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .topbar-copy {
+    width: calc(100% - 4rem);
+  }
+
+  .topbar h1 {
+    line-height: 1.05;
+  }
+
+  .status-pill.subtle {
+    display: none;
   }
 }
 

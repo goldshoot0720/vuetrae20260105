@@ -605,11 +605,21 @@ input:focus {
 }
 
 @media (max-width: 600px) {
+  .page {
+    gap: 0.85rem;
+  }
+
+  .header,
+  .card {
+    padding: 1rem;
+  }
+
   .header {
     padding: 1rem;
   }
   .actions {
     justify-content: flex-start;
+    margin-top: 1rem;
   }
   .actions .btn {
     width: 100%;

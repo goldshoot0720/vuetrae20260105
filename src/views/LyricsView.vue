@@ -1223,6 +1223,9 @@ const closeModal = () => {
   transform: translateY(-4px);
   border-color: rgba(120, 217, 255, 0.28);
 }
+.card:active {
+  transform: translateY(-1px) scale(0.995);
+}
 
 .thumb.lyrics {
   height: 170px;
@@ -1374,5 +1377,35 @@ const closeModal = () => {
   text-align: center;
   color: var(--color-text-soft);
   font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 0.85rem;
+  }
+
+  .header,
+  .toolbar,
+  .modal-content,
+  .audio-player-section,
+  .lyrics-text {
+    padding-left: 0.95rem;
+    padding-right: 0.95rem;
+  }
+
+  .modal-content {
+    width: calc(100% - 1rem);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    max-height: 88vh;
+  }
+
+  .thumb.lyrics {
+    height: 154px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
 }
 </style>

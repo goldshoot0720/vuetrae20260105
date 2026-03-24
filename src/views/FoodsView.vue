@@ -280,6 +280,9 @@ onMounted(() => {
   border: 1px solid var(--panel-stroke);
   box-shadow: var(--panel-shadow);
 }
+.card:hover {
+  border-color: rgba(120, 217, 255, 0.2);
+}
 .thumb.food {
   min-height: 100%;
   background:
@@ -367,6 +370,8 @@ onMounted(() => {
   border-radius: var(--radius-xl);
   width: 90%;
   max-width: 500px;
+  max-height: min(86vh, 44rem);
+  overflow-y: auto;
   color: var(--color-text-strong);
   border: 1px solid rgba(151, 191, 255, 0.16);
   box-shadow: 0 34px 100px rgba(1, 6, 18, 0.55);
@@ -435,6 +440,42 @@ onMounted(() => {
   }
   .toolbar {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 0.85rem;
+  }
+
+  .header,
+  .toolbar {
+    padding: 0.95rem;
+  }
+
+  .card {
+    grid-template-columns: 1fr;
+  }
+
+  .thumb.food {
+    min-height: 11rem;
+  }
+
+  .meta {
+    padding: 0.9rem 0.9rem 1rem;
+  }
+
+  .ops {
+    width: 100%;
+  }
+
+  .ops .btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
   }
 }
 </style>

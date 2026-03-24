@@ -106,6 +106,9 @@ const videos = ref([
   border: 1px solid rgba(151, 191, 255, 0.12);
   box-shadow: var(--panel-shadow);
 }
+.card:active {
+  transform: scale(0.995);
+}
 .video-container {
   width: 100%;
   aspect-ratio: 16/9;
@@ -137,6 +140,20 @@ const videos = ref([
 @media (max-width: 800px) {
   .cards {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 0.85rem;
+  }
+
+  .header {
+    padding: 0.95rem;
+  }
+
+  .meta {
+    padding: 0.9rem 0.9rem 1rem;
   }
 }
 </style>

@@ -266,6 +266,9 @@ const images = ref([
   transform: translateY(-4px);
   border-color: rgba(120, 217, 255, 0.28);
 }
+.card:active {
+  transform: translateY(-1px) scale(0.995);
+}
 .thumb {
   height: 200px;
   background: linear-gradient(135deg, rgba(79, 114, 204, 0.38), rgba(11, 16, 31, 0.12));
@@ -339,6 +342,29 @@ const images = ref([
   }
   .toolbar {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 0.85rem;
+  }
+
+  .header,
+  .toolbar {
+    padding: 0.95rem;
+  }
+
+  .cards {
+    gap: 0.85rem;
+  }
+
+  .thumb {
+    height: 220px;
+  }
+
+  .meta {
+    padding: 0.9rem 0.9rem 1rem;
   }
 }
 </style>

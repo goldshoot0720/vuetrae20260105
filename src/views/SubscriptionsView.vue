@@ -253,6 +253,9 @@ onMounted(() => {
   border: 1px solid var(--panel-stroke);
   box-shadow: var(--panel-shadow);
 }
+.item:hover {
+  border-color: rgba(120, 217, 255, 0.2);
+}
 .main-info {
   display: flex;
   flex-direction: column;
@@ -317,6 +320,8 @@ onMounted(() => {
   border-radius: var(--radius-xl);
   width: 90%;
   max-width: 500px;
+  max-height: min(86vh, 44rem);
+  overflow-y: auto;
   color: var(--color-text-strong);
   border: 1px solid rgba(151, 191, 255, 0.16);
   box-shadow: 0 34px 100px rgba(1, 6, 18, 0.55);
@@ -386,6 +391,31 @@ onMounted(() => {
   .toolbar .btn,
   .modal-actions .btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    gap: 0.85rem;
+  }
+
+  .header,
+  .toolbar,
+  .item {
+    padding: 0.95rem;
+  }
+
+  .ops {
+    width: 100%;
+  }
+
+  .ops .btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
   }
 }
 </style>
