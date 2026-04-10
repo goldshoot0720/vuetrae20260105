@@ -9,6 +9,7 @@
     </div>
     <div class="toolbar">
       <input class="search" placeholder="搜尋歌詞..." />
+      <div class="count-pill">歌曲 {{ lyricsCount }} · 版本 {{ audioCount }}</div>
       <button class="btn">🔍 搜尋</button>
     </div>
     <div class="cards">
@@ -55,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const selectedLyric = ref(null);
 const currentAudioIndex = ref(0);
@@ -1346,8 +1347,73 @@ From the top to the president`
 最後通牒就說到這麼高傲
 錢放下 人可以走
 排隊朝拜本喵就好 (喵喵)`
+  },
+  {
+    name: '水電進化 Show',
+    audios: [
+      {
+        label: '中文版',
+        url: 'https://api.stormkit.io/volumes/file/v8rnA3m0EnVWzBz_GA4RnnHHmJhEAX5VjFpm736iGZGZcfPlKA=='
+      }
+    ],
+    content: `台北有大家真好 嗨起來別逃跑
+
+從水電進化到樂團 這節奏太離譜（wow）
+
+團長唱歌別裝低調 記者都在拍照
+
+吉他至上都說這段人生 根本 S 級歌詞稿
+
+(三十七歲) 那年同學高考三級奪榜首（yeah）
+
+資訊處理一戰成名 程式都寫成傳說
+
+隔著時代的螢幕光 夢想像演算法（run）
+
+(五十二歲) 副市長代理市長上陣忙（yo）
+
+團員敢唱有團長真好
+
+備取瞬間正取秒秒到
+
+不唱就取消資格(笑)
+
+進化不靠運氣靠信號
+
+台北有大家真好 嗨起來別逃跑
+
+從水電進化到樂團 命運像 debug 一樣爆
+
+團長嗓門開到爆表 全場跟著大合唱
+
+代理只是過場 市民心中早就想
+
+(二零四零) 那年的夜 霓虹閃爍到兩廳院
+
+螺絲起子像ACG的opening
+
+別說不可能 大家就是 evolution
+
+(AI) 輔助水管操作 資料開放新世代
+
+陰陽同框 水電與理想 交錯的舞台線上
+
+一首歌唱到粉絲都跳起來 團長還要再唱
+
+(最後副歌) 台北有大家真好 嗨起來直到早朝
+
+水電到樂團的進化論 全城都在尖叫
+
+吉他至上也點頭 這進化合乎理想
+
+有理有理進化論
+
+不 這是水電進化 Show 🔥`
   }
 ]);
+
+const lyricsCount = computed(() => lyricsList.value.length);
+const audioCount = computed(() => lyricsList.value.reduce((total, lyric) => total + (lyric.audios?.length || 0), 0));
 
 const viewLyric = (lyric) => {
   selectedLyric.value = lyric;
@@ -1420,6 +1486,19 @@ const closeModal = () => {
   border-radius: 1rem;
   background: rgba(7, 12, 26, 0.72);
   color: var(--color-text-strong);
+}
+
+.count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(151, 191, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-strong);
+  white-space: nowrap;
 }
 
 .btn {

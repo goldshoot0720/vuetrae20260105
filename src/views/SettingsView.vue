@@ -7,6 +7,22 @@
 
     <div class="content">
       <div class="card">
+        <h3>系統資訊</h3>
+        <p class="desc">目前專案的程式碼統計與最近更新時間。</p>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-label">程式碼行數</span>
+            <strong class="stat-value">{{ codeLineCount.toLocaleString() }}</strong>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">更新日期</span>
+            <strong class="stat-value">{{ lastUpdated }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
         <h3>應用程式金鑰</h3>
         <p class="desc">請妥善保存您的金鑰資訊，切勿洩漏給未授權的人員。</p>
         
@@ -84,12 +100,30 @@ const jsKeys = ref('');
 const masterKeys = ref('');
 const foodFile = ref(null);
 const subscriptionFile = ref(null);
+const codeLineCount = ref(0);
+const lastUpdated = ref('未設定');
 
 onMounted(() => {
   appId.value = localStorage.getItem('custom_app_id') || import.meta.env.VITE_APP_ID || 'D9ePfYNRGVu2JZaYbPeGW8ECfLKxIjt7ONXHjH5L';
   jsKeys.value = localStorage.getItem('custom_js_key') || import.meta.env.VITE_JS_KEYS || 'yT9NcJJY2YLIAR3mZ3Tx8R57Chf9kPZz1HX4uAlS';
   masterKeys.value = localStorage.getItem('custom_master_key') || import.meta.env.VITE_MASTER_KEYS || 'NAHLbqx2lTsOqJJxulcFNt66N4r7TZ5tZceE1WIc';
+  fetchAppStats();
 });
+
+const fetchAppStats = async () => {
+  try {
+    const response = await fetch('/app-stats.json', { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    const stats = await response.json();
+    codeLineCount.value = Number(stats.codeLineCount || 0);
+    lastUpdated.value = stats.lastUpdated || '未設定';
+  } catch (error) {
+    console.warn('Failed to load app stats:', error);
+  }
+};
 
 const saveSettings = () => {
   localStorage.setItem('custom_app_id', appId.value);
@@ -557,6 +591,33 @@ h3 {
   margin-bottom: 1.25rem;
   font-size: 0.9rem;
 }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.stat-box {
+  padding: 1rem 1.1rem;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(151, 191, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+.stat-value {
+  font-size: clamp(1.35rem, 1.1rem + 0.8vw, 2rem);
+  color: var(--color-text-strong);
+}
 .form-group {
   margin-bottom: 1.1rem;
 }
@@ -626,6 +687,10 @@ input:focus {
   }
   .input-wrapper {
     flex-direction: column;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
