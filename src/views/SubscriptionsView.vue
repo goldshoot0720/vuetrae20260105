@@ -27,6 +27,9 @@
       >
       <button class="btn">🔍 搜尋</button>
     </div>
+    <div class="summary-pill">
+      顯示筆數 {{ filteredSubscriptions.length }} / {{ subscriptions.length }}
+    </div>
     <div class="list">
       <div class="item" v-for="item in filteredSubscriptions" :key="item.id">
         <label class="select-chip">
@@ -526,13 +529,13 @@ onMounted(() => {
   width: 3rem;
   height: 3rem;
   border-radius: 1rem;
-  background: linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(63, 103, 255, 0.82));
+  background: linear-gradient(145deg, rgba(84, 228, 188, 1), rgba(36, 139, 114, 0.86));
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   color: #04111f;
-  box-shadow: 0 18px 36px rgba(47, 113, 255, 0.22);
+  box-shadow: 0 18px 36px rgba(30, 122, 101, 0.22);
 }
 
 .hidden-file {
@@ -549,8 +552,8 @@ onMounted(() => {
   gap: 0.45rem;
   padding: 0.45rem 0.7rem;
   border-radius: 999px;
-  background: rgba(7, 12, 26, 0.84);
-  border: 1px solid rgba(151, 191, 255, 0.18);
+  background: rgba(10, 15, 20, 0.88);
+  border: 1px solid rgba(123, 161, 152, 0.16);
   color: var(--color-text-strong);
   font-size: 0.75rem;
   backdrop-filter: blur(8px);
@@ -566,7 +569,7 @@ onMounted(() => {
 .ops .btn,
 .modal-actions .btn {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(151, 191, 255, 0.12);
+  border: 1px solid rgba(123, 161, 152, 0.14);
   color: var(--color-text-strong);
   padding: 0.82rem 1rem;
   border-radius: 999px;
@@ -574,8 +577,8 @@ onMounted(() => {
 }
 
 .actions .primary {
-  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
-  border-color: rgba(120, 217, 255, 0.28);
+  background: linear-gradient(135deg, rgba(36, 139, 114, 0.3), rgba(78, 128, 209, 0.16));
+  border-color: rgba(84, 228, 188, 0.24);
 }
 
 .actions .danger,
@@ -597,7 +600,7 @@ onMounted(() => {
   padding: 1rem 1.15rem;
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(151, 191, 255, 0.1);
+  border: 1px solid rgba(123, 161, 152, 0.12);
 }
 
 .search {
@@ -605,9 +608,22 @@ onMounted(() => {
   min-height: 3rem;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
-  border: 1px solid rgba(151, 191, 255, 0.12);
-  background: rgba(7, 12, 26, 0.72);
+  border: 1px solid rgba(123, 161, 152, 0.14);
+  background: rgba(10, 15, 20, 0.84);
   color: var(--color-text-strong);
+}
+
+.summary-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(10, 15, 20, 0.88);
+  border: 1px solid rgba(123, 161, 152, 0.14);
+  color: var(--color-text-strong);
+  font-size: 0.84rem;
+  width: fit-content;
 }
 
 .list {
@@ -629,7 +645,7 @@ onMounted(() => {
 }
 
 .item:hover {
-  border-color: rgba(120, 217, 255, 0.2);
+  border-color: rgba(84, 228, 188, 0.2);
 }
 
 .main-info {
@@ -687,7 +703,7 @@ onMounted(() => {
 .no-data {
   padding: 1.25rem;
   border-radius: var(--radius-lg);
-  border: 1px dashed rgba(151, 191, 255, 0.22);
+  border: 1px dashed rgba(123, 161, 152, 0.24);
   color: var(--color-text-soft);
 }
 
@@ -714,7 +730,7 @@ onMounted(() => {
   max-height: min(86vh, 46rem);
   overflow-y: auto;
   color: var(--color-text-strong);
-  border: 1px solid rgba(151, 191, 255, 0.16);
+  border: 1px solid rgba(123, 161, 152, 0.16);
   box-shadow: 0 34px 100px rgba(1, 6, 18, 0.55);
 }
 
@@ -753,8 +769,8 @@ onMounted(() => {
   min-height: 3rem;
   padding: 0.85rem 1rem;
   border-radius: 1rem;
-  border: 1px solid rgba(151, 191, 255, 0.12);
-  background: rgba(7, 12, 26, 0.82);
+  border: 1px solid rgba(123, 161, 152, 0.14);
+  background: rgba(10, 15, 20, 0.84);
   color: var(--color-text-strong);
   box-sizing: border-box;
   font: inherit;
@@ -787,8 +803,8 @@ onMounted(() => {
 }
 
 .modal-actions .btn.primary {
-  background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
-  border-color: rgba(120, 217, 255, 0.28);
+  background: linear-gradient(135deg, rgba(36, 139, 114, 0.3), rgba(78, 128, 209, 0.16));
+  border-color: rgba(84, 228, 188, 0.24);
 }
 
 @media (max-width: 700px) {
