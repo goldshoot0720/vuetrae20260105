@@ -17,14 +17,28 @@
         <button class="btn primary" @click="openModal(null)">新增食品</button>
       </div>
     </div>
+
     <div class="toolbar">
       <input
         v-model.trim="searchTerm"
         class="search"
         placeholder="搜尋食品名稱、商店、圖片雜湊..."
       >
+      <div class="count-pill">筆數 {{ filteredFoods.length }} / {{ foods.length }}</div>
       <button class="btn">🔍 搜尋</button>
     </div>
+
+    <div v-if="progress.active" class="progress-panel" :class="[`is-${progress.kind}`]">
+      <div class="progress-copy">
+        <strong>{{ progress.title }}</strong>
+        <span>{{ progress.message }}</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" :style="{ width: `${progress.percent}%` }"></div>
+      </div>
+      <div class="progress-meta">{{ progress.percent }}%</div>
+    </div>
+
     <div class="cards">
       <div class="card" v-for="item in filteredFoods" :key="item.id">
         <div class="thumb food" :style="item.get('photo') ? { backgroundImage: `url(${item.get('photo')})` } : {}"></div>
@@ -106,6 +120,13 @@ const foodFile = ref(null);
 const searchTerm = ref('');
 const showModal = ref(false);
 const editingItem = ref(null);
+const progress = reactive({
+  active: false,
+  kind: 'idle',
+  title: '',
+  message: '',
+  percent: 0
+});
 const formData = reactive({
   name: '',
   amount: 0,
@@ -139,6 +160,36 @@ const formatDateInput = (value) => {
   const offset = date.getTimezoneOffset();
   const localDate = new Date(date.getTime() - offset * 60000);
   return localDate.toISOString().split('T')[0];
+};
+
+const startProgress = (kind, title, message) => {
+  progress.active = true;
+  progress.kind = kind;
+  progress.title = title;
+  progress.message = message;
+  progress.percent = 0;
+  console.info(`[food:${kind}] ${title} - ${message}`);
+};
+
+const updateProgress = (percent, message) => {
+  progress.percent = Math.max(0, Math.min(100, Math.round(percent)));
+  progress.message = message;
+  console.info(`[food:${progress.kind}] ${progress.percent}% - ${message}`);
+};
+
+const finishProgress = (message) => {
+  progress.percent = 100;
+  progress.message = message;
+  console.info(`[food:${progress.kind}] 100% - ${message}`);
+  window.setTimeout(() => {
+    progress.active = false;
+  }, 1200);
+};
+
+const failProgress = (message, error) => {
+  progress.kind = 'error';
+  progress.message = message;
+  console.error(`[food:error] ${message}`, error);
 };
 
 const resetForm = () => {
@@ -293,10 +344,12 @@ const normalizeImportedValue = (value) => String(value || '').trim();
 
 const exportFoodCSV = async () => {
   try {
+    startProgress('export', '匯出食品 CSV', '正在讀取食品資料...');
     const query = new Parse.Query('food');
     query.ascending('todate');
     query.limit(1000);
     const results = await query.find();
+    updateProgress(30, `已讀取 ${results.length} 筆資料，正在整理欄位...`);
 
     const rows = results.map((item) => ({
       name: item.get('name') || '',
@@ -308,6 +361,7 @@ const exportFoodCSV = async () => {
       photohash: item.get('photohash') || ''
     }));
 
+    updateProgress(70, '正在產生 CSV 檔案...');
     const csv = convertRowsToCSV(rows);
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -318,7 +372,9 @@ const exportFoodCSV = async () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    finishProgress(`匯出完成，共 ${rows.length} 筆。`);
   } catch (error) {
+    failProgress('匯出失敗。', error);
     console.error('Error exporting food CSV:', error);
     alert('匯出失敗：' + error.message);
   }
@@ -329,7 +385,9 @@ const handleFoodImport = async (event) => {
   if (!file) return;
 
   try {
+    startProgress('import', '匯入食品 CSV', `正在讀取檔案 ${file.name}...`);
     const csvText = await file.text();
+    updateProgress(10, '檔案讀取完成，正在解析 CSV...');
     const rows = parseCSV(csvText);
     if (rows.length < 2) {
       throw new Error('CSV 內容為空，或沒有資料列。');
@@ -345,6 +403,8 @@ const handleFoodImport = async (event) => {
 
     const Food = Parse.Object.extend('food');
     let count = 0;
+    const total = rows.length - 1;
+    updateProgress(15, `欄位檢查完成，準備匯入 ${total} 筆資料...`);
 
     for (const row of rows.slice(1)) {
       if (!row.some((cell) => normalizeImportedValue(cell) !== '')) continue;
@@ -368,11 +428,14 @@ const handleFoodImport = async (event) => {
 
       await food.save();
       count += 1;
+      updateProgress(15 + (count / Math.max(total, 1)) * 80, `已匯入 ${count} / ${total} 筆...`);
     }
 
     await fetchData();
+    finishProgress(`匯入完成，共 ${count} 筆。`);
     alert(`成功匯入 ${count} 筆食品資料！`);
   } catch (error) {
+    failProgress('匯入失敗。', error);
     console.error('Import food error:', error);
     alert('匯入失敗：' + error.message);
   } finally {
@@ -481,6 +544,8 @@ onMounted(() => {
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(151, 191, 255, 0.1);
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .search {
@@ -491,6 +556,63 @@ onMounted(() => {
   border: 1px solid rgba(151, 191, 255, 0.12);
   background: rgba(7, 12, 26, 0.72);
   color: var(--color-text-strong);
+}
+
+.count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(151, 191, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-strong);
+  white-space: nowrap;
+}
+
+.progress-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(10rem, 18rem) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(151, 191, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.progress-panel.is-error {
+  border-color: rgba(255, 124, 142, 0.28);
+}
+
+.progress-copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.progress-copy strong {
+  color: var(--color-text-strong);
+}
+
+.progress-copy span,
+.progress-meta {
+  font-size: 0.84rem;
+  color: var(--color-text-soft);
+}
+
+.progress-track {
+  height: 0.55rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(72, 166, 255, 0.9), rgba(78, 255, 199, 0.86));
+  transition: width 0.25s ease;
 }
 
 .cards {
@@ -686,6 +808,10 @@ onMounted(() => {
     grid-template-columns: 1fr;
     flex-direction: column;
   }
+
+  .progress-panel {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 600px) {
@@ -716,6 +842,7 @@ onMounted(() => {
 
   .toolbar {
     flex-direction: column;
+    align-items: stretch;
   }
 }
 
