@@ -32,7 +32,7 @@ const contentStyle = computed(() => ({
 
 const topbarTitle = computed(() => route.meta?.title || 'AI 管理中心')
 const topbarEyebrow = computed(() => route.meta?.eyebrow || 'Workspace')
-const topbarStatus = computed(() => (isMobile.value ? 'Mobile Adaptive' : 'Desktop Layout'))
+const topbarStatus = computed(() => (isMobile.value ? 'Mobile Ledger' : 'Portfolio Layout'))
 
 onMounted(() => {
   checkScreenSize()
@@ -66,7 +66,7 @@ onUnmounted(() => {
             <span class="status-dot"></span>
             <span>{{ topbarStatus }}</span>
           </div>
-          <div class="status-pill subtle">2026 Interface</div>
+          <div class="status-pill subtle">Fintech System</div>
         </div>
       </header>
       <main class="main">
@@ -111,6 +111,7 @@ onUnmounted(() => {
   margin: 0 auto;
   width: min(100%, calc(var(--content-width) + 4rem));
   color: var(--color-text-strong);
+  backdrop-filter: blur(16px);
 }
 
 .topbar-copy {
@@ -122,7 +123,7 @@ onUnmounted(() => {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
-  color: var(--color-text-soft);
+  color: color-mix(in oklab, var(--accent-strong) 54%, var(--color-text-soft));
 }
 
 .topbar h1 {
@@ -130,7 +131,7 @@ onUnmounted(() => {
   font-weight: 700;
   margin: 0;
   letter-spacing: -0.04em;
-  text-shadow: 0 0 24px rgba(90, 185, 255, 0.12);
+  text-shadow: 0 0 20px rgba(35, 148, 121, 0.12);
 }
 
 .topbar-rail {
@@ -150,9 +151,10 @@ onUnmounted(() => {
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(151, 191, 255, 0.12);
+  border: 1px solid rgba(123, 161, 152, 0.16);
   color: var(--color-text-strong);
   font-size: 0.8rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .status-pill.subtle {
@@ -163,8 +165,8 @@ onUnmounted(() => {
   width: 0.55rem;
   height: 0.55rem;
   border-radius: 50%;
-  background: linear-gradient(180deg, rgba(109, 255, 204, 1), rgba(79, 173, 255, 1));
-  box-shadow: 0 0 14px rgba(109, 255, 204, 0.45);
+  background: linear-gradient(180deg, rgba(84, 228, 188, 1), rgba(40, 167, 139, 1));
+  box-shadow: 0 0 12px rgba(84, 228, 188, 0.35);
 }
 
 .menu-toggle {
@@ -174,21 +176,21 @@ onUnmounted(() => {
   width: 3rem;
   height: 3rem;
   background:
-    linear-gradient(180deg, rgba(24, 36, 68, 0.92), rgba(11, 18, 34, 0.92));
-  border: 1px solid rgba(136, 177, 255, 0.18);
+    linear-gradient(180deg, rgba(27, 36, 43, 0.96), rgba(14, 19, 25, 0.96));
+  border: 1px solid rgba(123, 161, 152, 0.16);
   color: var(--color-text-strong);
   cursor: pointer;
   padding: 0;
   border-radius: 1rem;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 16px 32px rgba(3, 8, 22, 0.28);
+    0 16px 32px rgba(0, 0, 0, 0.24);
 }
 
 .menu-toggle:hover {
   background:
-    linear-gradient(180deg, rgba(33, 48, 90, 0.96), rgba(14, 24, 46, 0.96));
-  border-color: rgba(126, 207, 255, 0.36);
+    linear-gradient(180deg, rgba(33, 45, 54, 0.98), rgba(17, 24, 31, 0.98));
+  border-color: rgba(83, 200, 166, 0.34);
 }
 
 .main {
@@ -218,9 +220,9 @@ onUnmounted(() => {
   position: fixed;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(4, 8, 18, 0.96), rgba(6, 10, 20, 0.98)),
-    radial-gradient(1200px 800px at 78% 10%, rgba(65, 151, 255, 0.18) 0%, rgba(65, 151, 255, 0) 62%),
-    radial-gradient(880px 660px at 18% 12%, rgba(102, 255, 201, 0.12) 0%, rgba(102, 255, 201, 0) 58%);
+    linear-gradient(180deg, rgba(7, 11, 15, 0.98), rgba(10, 14, 19, 1)),
+    radial-gradient(1100px 780px at 80% 10%, rgba(67, 151, 131, 0.14) 0%, rgba(67, 151, 131, 0) 58%),
+    radial-gradient(860px 640px at 16% 8%, rgba(81, 131, 214, 0.1) 0%, rgba(81, 131, 214, 0) 54%);
   z-index: -1;
   overflow: hidden;
 }
@@ -234,19 +236,18 @@ onUnmounted(() => {
 
 .bg::before {
   background-image:
-    linear-gradient(rgba(135, 175, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(135, 175, 255, 0.06) 1px, transparent 1px);
-  background-size: 84px 84px;
+    linear-gradient(rgba(111, 132, 140, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111, 132, 140, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
   mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.65), transparent 88%);
 }
 
 .bg::after {
   background:
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px),
-    radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.1) 0 1px, transparent 1px),
-    radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.09) 0 1px, transparent 1px);
-  background-size: 240px 240px, 300px 300px, 360px 360px;
-  opacity: 0.5;
+    linear-gradient(90deg, rgba(67, 151, 131, 0.08) 0 1px, transparent 1px),
+    linear-gradient(rgba(67, 151, 131, 0.06) 0 1px, transparent 1px);
+  background-size: 18rem 100%, 100% 9rem;
+  opacity: 0.36;
 }
 
 .mobile-overlay {

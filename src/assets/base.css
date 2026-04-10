@@ -1,27 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
 
 :root {
   color-scheme: dark;
-  --color-background: oklch(0.16 0.02 252);
-  --color-background-soft: oklch(0.21 0.028 252);
-  --color-background-mute: oklch(0.26 0.03 248);
-  --color-border: color-mix(in oklab, white 12%, transparent);
-  --color-border-hover: color-mix(in oklab, white 24%, transparent);
-  --color-heading: oklch(0.95 0.01 250);
-  --color-text: oklch(0.82 0.02 245);
-  --color-text-strong: oklch(0.98 0.01 250);
-  --color-text-soft: oklch(0.7 0.02 245);
-  --panel-bg: linear-gradient(180deg, rgba(13, 18, 34, 0.82), rgba(8, 12, 26, 0.72));
-  --panel-bg-strong: linear-gradient(180deg, rgba(19, 26, 48, 0.94), rgba(8, 12, 24, 0.92));
-  --panel-stroke: rgba(163, 196, 255, 0.16);
-  --panel-shadow: 0 28px 80px rgba(1, 6, 20, 0.45);
-  --accent: oklch(0.74 0.12 208);
-  --accent-strong: oklch(0.82 0.14 196);
-  --accent-soft: rgba(75, 170, 255, 0.18);
-  --accent-secondary: oklch(0.72 0.09 164);
+  --color-background: oklch(0.15 0.01 210);
+  --color-background-soft: oklch(0.19 0.012 210);
+  --color-background-mute: oklch(0.24 0.015 210);
+  --color-border: color-mix(in oklab, white 9%, transparent);
+  --color-border-hover: color-mix(in oklab, white 18%, transparent);
+  --color-heading: oklch(0.96 0.005 210);
+  --color-text: oklch(0.82 0.01 210);
+  --color-text-strong: oklch(0.985 0.002 210);
+  --color-text-soft: oklch(0.68 0.01 210);
+  --panel-bg: linear-gradient(180deg, rgba(16, 22, 29, 0.92), rgba(10, 14, 20, 0.88));
+  --panel-bg-strong: linear-gradient(180deg, rgba(20, 28, 36, 0.98), rgba(11, 16, 22, 0.96));
+  --panel-stroke: rgba(168, 188, 196, 0.14);
+  --panel-shadow: 0 26px 70px rgba(0, 0, 0, 0.36);
+  --accent: oklch(0.73 0.09 185);
+  --accent-strong: oklch(0.8 0.12 175);
+  --accent-soft: rgba(58, 186, 157, 0.14);
+  --accent-secondary: oklch(0.71 0.08 222);
   --danger: oklch(0.68 0.19 20);
   --warning: oklch(0.8 0.14 92);
-  --success: oklch(0.79 0.12 157);
+  --success: oklch(0.79 0.11 158);
   --radius-xl: 28px;
   --radius-lg: 22px;
   --radius-md: 16px;
@@ -44,7 +44,7 @@ body {
   background: var(--color-background);
   line-height: 1.55;
   font-family:
-    'Manrope',
+    'IBM Plex Sans',
     'Segoe UI',
     sans-serif;
   font-size: 15px;
@@ -71,7 +71,7 @@ body::before {
   height: 42rem;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(100, 194, 255, 0.28) 0%, rgba(100, 194, 255, 0.08) 34%, rgba(100, 194, 255, 0) 70%);
+    radial-gradient(circle, rgba(72, 190, 160, 0.2) 0%, rgba(72, 190, 160, 0.06) 34%, rgba(72, 190, 160, 0) 70%);
   filter: blur(10px);
 }
 
@@ -82,7 +82,7 @@ body::after {
   height: 36rem;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(96, 255, 193, 0.16) 0%, rgba(96, 255, 193, 0.06) 38%, rgba(96, 255, 193, 0) 72%);
+    radial-gradient(circle, rgba(103, 172, 255, 0.12) 0%, rgba(103, 172, 255, 0.04) 38%, rgba(103, 172, 255, 0) 72%);
   filter: blur(14px);
 }
 
@@ -100,12 +100,12 @@ h4,
 h5,
 h6 {
   color: var(--color-heading);
-  font-family: 'Space Grotesk', 'Manrope', sans-serif;
-  letter-spacing: -0.03em;
+  font-family: 'Plus Jakarta Sans', 'IBM Plex Sans', sans-serif;
+  letter-spacing: -0.035em;
 }
 
 ::selection {
-  background: rgba(101, 195, 255, 0.3);
+  background: rgba(61, 188, 157, 0.26);
   color: var(--color-text-strong);
 }
 

@@ -34,13 +34,13 @@ defineEmits(['close'])
   bottom: 0;
   width: 240px;
   background:
-    linear-gradient(180deg, rgba(12, 19, 38, 0.92), rgba(6, 10, 22, 0.96));
+    linear-gradient(180deg, rgba(15, 21, 27, 0.96), rgba(9, 13, 17, 0.98));
   color: var(--color-text-strong);
   padding: 1.4rem 1rem;
   z-index: 1000;
   transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   transform: translateX(-100%);
-  border-right: 1px solid rgba(136, 177, 255, 0.14);
+  border-right: 1px solid rgba(123, 161, 152, 0.12);
   backdrop-filter: blur(18px);
   box-shadow:
     inset -1px 0 0 rgba(255, 255, 255, 0.04),
@@ -61,7 +61,7 @@ defineEmits(['close'])
   height: 8rem;
   border-radius: 1.5rem;
   background:
-    radial-gradient(circle at top left, rgba(88, 193, 255, 0.22), transparent 58%);
+    radial-gradient(circle at top left, rgba(58, 186, 157, 0.18), transparent 58%);
   opacity: 0.8;
 }
 .sidebar::after {
@@ -70,7 +70,7 @@ defineEmits(['close'])
   height: 11rem;
   border-radius: 50%;
   background:
-    radial-gradient(circle, rgba(98, 255, 193, 0.12), transparent 66%);
+    radial-gradient(circle, rgba(99, 145, 222, 0.1), transparent 66%);
 }
 
 .brand {
@@ -80,8 +80,8 @@ defineEmits(['close'])
   margin-bottom: 1.6rem;
   padding: 0.55rem;
   border-radius: 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(151, 191, 255, 0.08);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(123, 161, 152, 0.1);
   position: relative;
   z-index: 1;
 }
@@ -90,13 +90,13 @@ defineEmits(['close'])
   height: 36px;
   border-radius: 12px;
   background:
-    linear-gradient(145deg, rgba(97, 208, 255, 0.94), rgba(48, 101, 255, 0.88));
+    linear-gradient(145deg, rgba(84, 228, 188, 0.96), rgba(36, 139, 114, 0.86));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   color: #05101f;
-  box-shadow: 0 12px 32px rgba(49, 112, 255, 0.4);
+  box-shadow: 0 12px 32px rgba(28, 124, 102, 0.34);
 }
 .brand-name {
   font-size: 0.96rem;
@@ -131,7 +131,7 @@ defineEmits(['close'])
   width: 0.2rem;
   height: calc(100% - 1rem);
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(92, 210, 255, 1), rgba(114, 255, 205, 0.76));
+  background: linear-gradient(180deg, rgba(84, 228, 188, 1), rgba(46, 154, 129, 0.72));
   transform: scaleY(0);
   transition: transform 0.25s ease;
   transform-origin: center;
@@ -139,13 +139,13 @@ defineEmits(['close'])
 .item:hover {
   color: var(--color-text-strong);
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(143, 183, 255, 0.12);
+  border-color: rgba(83, 200, 166, 0.16);
 }
 .item.router-link-active {
   color: var(--color-text-strong);
   background:
-    linear-gradient(135deg, rgba(53, 93, 188, 0.42), rgba(22, 35, 74, 0.7));
-  border-color: rgba(121, 202, 255, 0.26);
+    linear-gradient(135deg, rgba(31, 103, 88, 0.42), rgba(18, 34, 31, 0.72));
+  border-color: rgba(83, 200, 166, 0.24);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 16px 28px rgba(3, 8, 22, 0.22);

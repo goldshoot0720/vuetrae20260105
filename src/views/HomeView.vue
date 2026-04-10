@@ -166,8 +166,8 @@ onMounted(() => {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at top right, rgba(93, 186, 255, 0.2), transparent 34%),
-    linear-gradient(135deg, rgba(96, 255, 196, 0.08), transparent 48%);
+    radial-gradient(circle at top right, rgba(60, 171, 145, 0.18), transparent 34%),
+    linear-gradient(135deg, rgba(95, 143, 218, 0.08), transparent 48%);
   pointer-events: none;
 }
 .hero > * {
@@ -178,14 +178,14 @@ onMounted(() => {
   height: 4.5rem;
   border-radius: 1.35rem;
   background:
-    linear-gradient(145deg, rgba(101, 216, 255, 1), rgba(55, 103, 255, 0.82));
+    linear-gradient(145deg, rgba(84, 228, 188, 1), rgba(36, 139, 114, 0.86));
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
   margin-bottom: 1rem;
   color: #03101f;
-  box-shadow: 0 24px 45px rgba(41, 114, 255, 0.28);
+  box-shadow: 0 24px 45px rgba(30, 122, 101, 0.28);
 }
 .title {
   font-size: clamp(2rem, 1.5rem + 2vw, 3.7rem);
@@ -209,7 +209,7 @@ onMounted(() => {
   color: var(--color-text-soft);
   margin-bottom: 1.5rem;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(151, 191, 255, 0.12);
+  border: 1px solid rgba(123, 161, 152, 0.14);
 }
 .tech {
   display: grid;
@@ -221,7 +221,7 @@ onMounted(() => {
   border-radius: var(--radius-lg);
   padding: 1.25rem;
   text-align: left;
-  border: 1px solid rgba(153, 193, 255, 0.12);
+  border: 1px solid rgba(123, 161, 152, 0.12);
   backdrop-filter: blur(10px);
 }
 .card-title {
@@ -269,7 +269,7 @@ onMounted(() => {
   border-radius: var(--radius-md);
   padding: 1rem;
   text-align: left;
-  border: 1px solid rgba(144, 185, 255, 0.1);
+  border: 1px solid rgba(123, 161, 152, 0.12);
 }
 .stat .label {
   font-size: 0.74rem;
