@@ -14,6 +14,8 @@
         <button class="btn" @click="fetchData">重新載入</button>
         <button class="btn" @click="exportSubscriptionCSV">匯出 CSV</button>
         <button class="btn" @click="subscriptionFile?.click()">匯入 CSV</button>
+        <button class="btn" @click="toggleSelectAll">{{ isAllSelected ? '取消全選' : '全選' }}</button>
+        <button class="btn danger" :disabled="selectedSubscriptionIds.size === 0" @click="deleteSelectedSubscriptions">全選刪除</button>
         <button class="btn primary" @click="openModal(null)">新增訂閱</button>
       </div>
     </div>
@@ -27,6 +29,14 @@
     </div>
     <div class="list">
       <div class="item" v-for="item in filteredSubscriptions" :key="item.id">
+        <label class="select-chip">
+          <input
+            type="checkbox"
+            :checked="selectedSubscriptionIds.has(item.id)"
+            @change="toggleSubscriptionSelection(item.id)"
+          >
+          <span>選取</span>
+        </label>
         <div class="main-info">
           <div class="name">{{ item.get('name') || '未命名' }}</div>
           <div class="site-link" v-if="item.get('site')">
@@ -109,6 +119,7 @@ const showModal = ref(false);
 const editingItem = ref(null);
 const searchTerm = ref('');
 const subscriptionFile = ref(null);
+const selectedSubscriptionIds = ref(new Set());
 const formData = reactive({
   name: '',
   price: 0,
@@ -136,6 +147,11 @@ const filteredSubscriptions = computed(() => {
     return fields.some((value) => String(value || '').toLowerCase().includes(keyword));
   });
 });
+
+const isAllSelected = computed(() => (
+  filteredSubscriptions.value.length > 0
+  && filteredSubscriptions.value.every((item) => selectedSubscriptionIds.value.has(item.id))
+));
 
 const formatDateInput = (value) => {
   if (!value) return '';
@@ -192,6 +208,33 @@ const closeModal = () => {
   editingItem.value = null;
 };
 
+const toggleSubscriptionSelection = (id) => {
+  const next = new Set(selectedSubscriptionIds.value);
+  if (next.has(id)) {
+    next.delete(id);
+  } else {
+    next.add(id);
+  }
+  selectedSubscriptionIds.value = next;
+};
+
+const toggleSelectAll = () => {
+  if (isAllSelected.value) {
+    const next = new Set(selectedSubscriptionIds.value);
+    for (const item of filteredSubscriptions.value) {
+      next.delete(item.id);
+    }
+    selectedSubscriptionIds.value = next;
+    return;
+  }
+
+  const next = new Set(selectedSubscriptionIds.value);
+  for (const item of filteredSubscriptions.value) {
+    next.add(item.id);
+  }
+  selectedSubscriptionIds.value = next;
+};
+
 const saveSubscription = async () => {
   try {
     const Subscription = Parse.Object.extend('subscription');
@@ -224,10 +267,41 @@ const deleteSubscription = async (item) => {
 
   try {
     await item.destroy();
+    const next = new Set(selectedSubscriptionIds.value);
+    next.delete(item.id);
+    selectedSubscriptionIds.value = next;
     await fetchData();
   } catch (error) {
     console.error('Error deleting subscription:', error);
     alert('刪除失敗：' + error.message);
+  }
+};
+
+const deleteSelectedSubscriptions = async () => {
+  const selectedItems = filteredSubscriptions.value.filter((item) => selectedSubscriptionIds.value.has(item.id));
+  if (selectedItems.length === 0) {
+    alert('請先選取要刪除的訂閱。');
+    return;
+  }
+
+  const confirmation = window.prompt(
+    `將刪除 ${selectedItems.length} 筆訂閱資料。\n請輸入 DELETE subscription 確認刪除：`,
+    ''
+  );
+
+  if (confirmation !== 'DELETE subscription') {
+    alert('未輸入正確指令，已取消刪除。');
+    return;
+  }
+
+  try {
+    await Parse.Object.destroyAll(selectedItems);
+    selectedSubscriptionIds.value = new Set();
+    await fetchData();
+    alert(`已刪除 ${selectedItems.length} 筆訂閱資料。`);
+  } catch (error) {
+    console.error('Error deleting selected subscriptions:', error);
+    alert('批次刪除失敗：' + error.message);
   }
 };
 
@@ -403,6 +477,9 @@ const fetchData = async () => {
     query.ascending('nextdate');
     query.limit(1000);
     subscriptions.value = await query.find();
+    selectedSubscriptionIds.value = new Set(
+      [...selectedSubscriptionIds.value].filter((id) => subscriptions.value.some((item) => item.id === id))
+    );
   } catch (error) {
     console.error('Error fetching subscriptions:', error);
   }
@@ -462,6 +539,28 @@ onMounted(() => {
   display: none;
 }
 
+.select-chip {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(7, 12, 26, 0.84);
+  border: 1px solid rgba(151, 191, 255, 0.18);
+  color: var(--color-text-strong);
+  font-size: 0.75rem;
+  backdrop-filter: blur(8px);
+}
+
+.select-chip input {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
 .actions .btn,
 .toolbar .btn,
 .ops .btn,
@@ -477,6 +576,19 @@ onMounted(() => {
 .actions .primary {
   background: linear-gradient(135deg, rgba(72, 166, 255, 0.3), rgba(78, 255, 199, 0.18));
   border-color: rgba(120, 217, 255, 0.28);
+}
+
+.actions .danger,
+.ops .danger {
+  background: rgba(255, 107, 129, 0.12);
+  color: #ffd8dc;
+  border-color: rgba(255, 124, 142, 0.22);
+}
+
+.actions .btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .toolbar {
@@ -513,6 +625,7 @@ onMounted(() => {
   gap: 1rem;
   border: 1px solid var(--panel-stroke);
   box-shadow: var(--panel-shadow);
+  position: relative;
 }
 
 .item:hover {
