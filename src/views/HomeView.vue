@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Parse from '../services/parse';
 
 const subscriptionTotal = ref(0);
@@ -82,6 +82,23 @@ const food3 = ref(0);
 const food7 = ref(0);
 const food3Date = ref('-');
 const food7Date = ref('-');
+let sleepReminderTimer = null;
+
+const SLEEP_REMINDER_SLOTS = [
+  { hour: 0, minute: 0 },
+  { hour: 0, minute: 30 },
+  { hour: 1, minute: 0 },
+  { hour: 1, minute: 30 },
+  { hour: 2, minute: 0 },
+  { hour: 2, minute: 15 },
+  { hour: 2, minute: 30 },
+  { hour: 2, minute: 45 },
+  { hour: 3, minute: 0 },
+  { hour: 3, minute: 15 },
+  { hour: 3, minute: 30 },
+  { hour: 3, minute: 45 },
+  { hour: 4, minute: 0 }
+];
 
 const addDays = (base, days) => {
   const d = new Date(base);
@@ -93,6 +110,53 @@ const formatDate = (d) => {
   if (!d) return '-';
   const x = new Date(d);
   return x.toLocaleDateString();
+};
+
+const formatDateTime = (date) => {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  const hh = String(date.getHours()).padStart(2, '0');
+  const mm = String(date.getMinutes()).padStart(2, '0');
+  return `${y}-${m}-${d} ${hh}:${mm}`;
+};
+
+const getSleepReminderKey = (date, slot) => {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  const hh = String(slot.hour).padStart(2, '0');
+  const mm = String(slot.minute).padStart(2, '0');
+  return `sleep-reminder:${y}-${m}-${d}:${hh}${mm}`;
+};
+
+const maybeShowSleepReminder = () => {
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+  for (let index = 0; index < SLEEP_REMINDER_SLOTS.length; index += 1) {
+    const slot = SLEEP_REMINDER_SLOTS[index];
+    const slotMinutes = slot.hour * 60 + slot.minute;
+    if (currentMinutes < slotMinutes) {
+      break;
+    }
+
+    const storageKey = getSleepReminderKey(now, slot);
+    if (localStorage.getItem(storageKey)) {
+      continue;
+    }
+
+    const message = [
+      '睡眠提示',
+      `今天日期與現在時刻：${formatDateTime(now)}`,
+      `提示次數：第 ${index + 1} 次 / 共 ${SLEEP_REMINDER_SLOTS.length} 次`,
+      '該休息睡覺了。'
+    ].join('\n');
+
+    alert(message);
+    localStorage.setItem(storageKey, String(now.getTime()));
+    break;
+  }
 };
 
 const fetchDashboard = async () => {
@@ -142,6 +206,14 @@ const fetchDashboard = async () => {
 
 onMounted(() => {
   fetchDashboard();
+  maybeShowSleepReminder();
+  sleepReminderTimer = window.setInterval(maybeShowSleepReminder, 30 * 1000);
+});
+
+onUnmounted(() => {
+  if (sleepReminderTimer) {
+    window.clearInterval(sleepReminderTimer);
+  }
 });
 </script>
 
